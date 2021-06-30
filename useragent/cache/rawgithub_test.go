@@ -1,10 +1,10 @@
 package cache
 
 import (
-	"testing"
 	"fmt"
 	"github.com/walkmiao/fake-useragent/setting"
 	"net/http"
+	"testing"
 )
 
 var r = NewRawCache(setting.CACHE_URL, fmt.Sprintf(setting.TEMP_FILE_NAME, setting.CACHE_VERSION))
@@ -18,7 +18,6 @@ func TestRaw_Get(t *testing.T) {
 	if exist == false {
 		t.Errorf("r.Get not exist")
 	}
-
 	rawResp = resp
 }
 

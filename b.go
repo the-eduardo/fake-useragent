@@ -3,13 +3,20 @@ package browser
 import (
 	"encoding/json"
 	"fmt"
-	"log"
-	"time"
 	"github.com/walkmiao/fake-useragent/setting"
 	"github.com/walkmiao/fake-useragent/spiders"
 	"github.com/walkmiao/fake-useragent/useragent"
 	"github.com/walkmiao/fake-useragent/useragent/cache"
+	"log"
+	"time"
 )
+func init(){
+	defaultBrowser = NewBrowser(Client{
+		MaxPage: setting.BROWSER_MAX_PAGE,
+		Delay:   setting.HTTP_DELAY,
+		Timeout: setting.HTTP_TIMEOUT,
+	}, Cache{})
+}
 
 type browser struct {
 	Client
@@ -26,12 +33,7 @@ type Cache struct {
 	UpdateFile bool
 }
 
-var defaultBrowser = NewBrowser(Client{
-	MaxPage: setting.BROWSER_MAX_PAGE,
-	Delay:   setting.HTTP_DELAY,
-	Timeout: setting.HTTP_TIMEOUT,
-}, Cache{})
-
+var defaultBrowser *browser
 func NewBrowser(client Client, cache Cache) *browser {
 	maxPage := setting.GetMaxPage(client.MaxPage)
 	delay := setting.GetDelay(client.Delay)
