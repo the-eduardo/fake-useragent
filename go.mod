@@ -1,4 +1,4 @@
-module fake-useragent
+module github.com/walkmiao/fake-useragent
 
 go 1.16
 
