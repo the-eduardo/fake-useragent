@@ -1,7 +1,7 @@
 package downloader
 
 import (
-	"fake-useragent/setting"
+	"github.com/walkmiao/fake-useragent/setting"
 	"testing"
 )
 

@@ -2,8 +2,8 @@ package cache
 
 import (
 	"io/ioutil"
-	"fake-useragent/downloader"
-	"fake-useragent/setting"
+	"github.com/walkmiao/fake-useragent/downloader"
+	"github.com/walkmiao/fake-useragent/setting"
 	"time"
 	"io"
 	"net/http"

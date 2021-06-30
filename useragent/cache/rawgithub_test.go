@@ -3,7 +3,7 @@ package cache
 import (
 	"testing"
 	"fmt"
-	"fake-useragent/setting"
+	"github.com/walkmiao/fake-useragent/setting"
 	"net/http"
 )
 

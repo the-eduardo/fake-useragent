@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"fake-useragent/setting"
+	"github.com/walkmiao/fake-useragent/setting"
 )
 
 var f = NewFileCache(GetTempDir(), fmt.Sprintf(setting.TEMP_FILE_TEST_NAME, setting.VERSION))
