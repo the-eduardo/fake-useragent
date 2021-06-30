@@ -3,7 +3,7 @@ package cache
 import (
 	"testing"
 	"fmt"
-	"github.com/EDDYCJY/fake-useragent/setting"
+	"fake-useragent/setting"
 	"net/http"
 )
 

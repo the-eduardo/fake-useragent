@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"log"
 	"time"
-
-	"github.com/EDDYCJY/fake-useragent/setting"
-	"github.com/EDDYCJY/fake-useragent/spiders"
-	"github.com/EDDYCJY/fake-useragent/useragent"
-	"github.com/EDDYCJY/fake-useragent/useragent/cache"
+	"fake-useragent/setting"
+	"fake-useragent/spiders"
+	"fake-useragent/useragent"
+	"fake-useragent/useragent/cache"
 )
 
 type browser struct {
