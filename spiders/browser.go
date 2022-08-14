@@ -8,10 +8,10 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/nozzle/throttler"
 
-	"github.com/walkmiao/fake-useragent/downloader"
-	"github.com/walkmiao/fake-useragent/scheduler"
-	"github.com/walkmiao/fake-useragent/setting"
-	"github.com/walkmiao/fake-useragent/useragent"
+	"github.com/the-eduardo/fake-useragent/downloader"
+	"github.com/the-eduardo/fake-useragent/scheduler"
+	"github.com/the-eduardo/fake-useragent/setting"
+	"github.com/the-eduardo/fake-useragent/useragent"
 )
 
 type Spider struct {
@@ -67,8 +67,8 @@ func (s *Spider) StartBrowser(delay time.Duration, timeout time.Duration) {
 			defer th.Done(err)
 
 			if url := scheduler.PopUrl(); url != "" {
-				downloader := downloader.Download{Delay: delay, Timeout: timeout}
-				resp, err = downloader.Get(url)
+				vDownloader := downloader.Download{Delay: delay, Timeout: timeout}
+				resp, err = vDownloader.Get(url)
 				if err != nil {
 					return
 				}

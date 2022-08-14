@@ -8,7 +8,7 @@ import (
 
 type useragent struct {
 	data map[string][]string
-	lock sync.Mutex
+	lock sync.RWMutex
 }
 
 var (
@@ -17,46 +17,64 @@ var (
 )
 
 func (u *useragent) Get(key string) []string {
+	u.lock.RLock()
+	defer u.lock.RUnlock()
 	return u.data[key]
 }
 
 func (u *useragent) GetAll() map[string][]string {
+	u.lock.RLock()
+	defer u.lock.RUnlock()
 	return u.data
 }
 
 func (u *useragent) GetRandom(key string) string {
+	u.lock.RLock()
+	defer u.lock.RUnlock()
 	browser := u.Get(key)
-	len := len(browser)
-	if len < 1 {
+	vLen := len(browser)
+	if vLen < 1 {
 		return ""
 	}
 
-	n := r.Intn(len)
+	n := r.Intn(vLen)
 	return browser[n]
 }
 
 func (u *useragent) GetAllRandom() string {
-	browsers := u.GetAll()
-	datas := []string{}
+	u.lock.RLock()
+	defer u.lock.RUnlock()
+	browsers := u.data
+	totalLen := 0
 	for _, uas := range browsers {
-		datas = append(datas, uas...)
+		totalLen += len(uas)
 	}
 
-	len := len(datas)
-	if len < 1 {
+	if totalLen < 1 {
 		return ""
 	}
 
-	n := r.Intn(len)
-	return datas[n]
+	index := r.Intn(totalLen)
+	var ua string
+	for _, uas := range browsers {
+		if index+1 <= len(uas) {
+			ua = uas[index]
+			break
+		}
+		index = index - len(uas)
+	}
+
+	return ua
 }
 
 func (u *useragent) Set(key, value string) {
 	u.lock.Lock()
-	defer u.lock.Unlock()
 	u.data[key] = append(u.data[key], value)
+	u.lock.Unlock()
 }
 
 func (u *useragent) SetData(data map[string][]string) {
+	u.lock.Lock()
 	u.data = data
+	u.lock.Unlock()
 }
