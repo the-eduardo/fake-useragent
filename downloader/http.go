@@ -11,16 +11,16 @@ type Download struct {
 	Timeout time.Duration
 }
 
-func (d *Download) Get(url string) (* http.Response, error) {
+func (d *Download) Get(url string) (*http.Response, error) {
 	time.Sleep(d.Delay)
 
 	client := &http.Client{
 		Transport: &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
-				Timeout:   d.Timeout,
-				KeepAlive: 30 * time.Second,
-				DualStack: true,
+				Timeout:       d.Timeout,
+				KeepAlive:     30 * time.Second,
+				FallbackDelay: 0,
 			}).DialContext,
 			MaxIdleConns:          100,
 			IdleConnTimeout:       90 * time.Second,

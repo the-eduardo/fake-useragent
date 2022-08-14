@@ -8,10 +8,10 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/nozzle/throttler"
 
-	"github.com/the-eduardo/fake-useragent/downloader"
-	"github.com/the-eduardo/fake-useragent/scheduler"
-	"github.com/the-eduardo/fake-useragent/setting"
-	"github.com/the-eduardo/fake-useragent/useragent"
+	"github.com/walkmiao/fake-useragent/downloader"
+	"github.com/walkmiao/fake-useragent/scheduler"
+	"github.com/walkmiao/fake-useragent/setting"
+	"github.com/walkmiao/fake-useragent/useragent"
 )
 
 type Spider struct {
@@ -43,8 +43,8 @@ func (a *Attribute) GetSpider() *Spider {
 }
 
 func (s *Spider) AppendBrowser(maxPage int) {
-	for tag, categorys := range setting.BrowserUserAgentMaps {
-		for _, category := range categorys {
+	for tag, categories := range setting.BrowserUserAgentMaps {
+		for _, category := range categories {
 			for page := 1; page <= maxPage; page++ {
 				attribute := Attribute{Tag: tag, Category: category, Page: page}
 				urlAttributeResults[attribute.GetSpider().FullUrl] = attribute
